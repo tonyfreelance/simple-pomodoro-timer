@@ -45,6 +45,7 @@ class App extends Component {
   }
 
   start = () => {
+    clearInterval(this.timerInterval);
     let initialSeconds = this.state.minutes * 60 + this.state.seconds;
     this.timerInterval = setInterval(() => {
       initialSeconds -= 1;
