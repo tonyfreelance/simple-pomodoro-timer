@@ -8,8 +8,8 @@ import ControlButtons from './ControlButtons';
 class App extends Component {
 
   state = {
-    minutes: 0,
-    seconds: 5
+    minutes: 25,
+    seconds: 0
   }
 
   longBreak = () => {
