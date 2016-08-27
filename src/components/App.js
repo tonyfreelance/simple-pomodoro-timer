@@ -1,90 +1,31 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import '../styles/App.css';
 import PomodoroButtons from './PomodoroButtons';
 import Timer from './Timer';
 import ControlButtons from './ControlButtons';
+import Nav from './Nav';
+import ShortcutGuide from './ShortcutGuide';
+import NotificationGuide from './NotificationGuide';
 
-class App extends Component {
-
-  state = {
-    minutes: 25,
-    seconds: 0
-  }
-
-  longBreak = () => {
-    clearInterval(this.timerInterval);
-    this.setState({
-      minutes: 15,
-      seconds: 0
-    }, this.start);
-  }
-
-  pomodoro = () => {
-    clearInterval(this.timerInterval);
-    this.setState({
-      minutes: 25,
-      seconds: 0
-    }, this.start);
-  }
-
-  reset = () => {
-    clearInterval(this.timerInterval);
-    this.setState({
-      minutes: 25,
-      seconds: 0
-    });
-  }
-
-  shortBreak = () => {
-    clearInterval(this.timerInterval);
-    this.setState({
-      minutes: 5,
-      seconds: 0
-    }, this.start);
-  }
-
-  start = () => {
-    clearInterval(this.timerInterval);
-    let initialSeconds = this.state.minutes * 60 + this.state.seconds;
-    this.timerInterval = setInterval(() => {
-      initialSeconds -= 1;
-      if (initialSeconds >= 0) {
-        const minutes = Math.floor(initialSeconds / 60);
-        const seconds = initialSeconds % 60;
-
-        this.setState({
-          minutes,
-          seconds
-        });
-      } else {
-        clearInterval(this.timerInterval);
-      }
-    }, 1000);
-  }
-
-  stop = () => {
-    clearInterval(this.timerInterval);
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>Pomodoro Timer</h1>
-        <PomodoroButtons
-          onPomodoro={this.pomodoro}
-          onShortBreak={this.shortBreak}
-          onLongBreak={this.longBreak}
-        />
-        <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
-        <ControlButtons
-          onStart={this.start}
-          onStop={this.stop}
-          onReset={this.reset}
-        />
+const App = () => {
+  return (
+    <div className="App">
+      <Nav />
+      <div className="ui text center aligned container App-content">
+        <PomodoroButtons />
+        <Timer />
+        <ControlButtons />
       </div>
-    );
-  }
+      <div className="ui two column doubling stackable very relaxed grid container">
+        <div className="column">
+          <ShortcutGuide />
+        </div>
+        <div className="column">
+          <NotificationGuide />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default App;
