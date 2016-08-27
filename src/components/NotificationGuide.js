@@ -18,7 +18,7 @@ const NotificationGuide = () => {
       <div className="header">
         Notifications
       </div>
-      <h5>You can change the audio tone and volume via Settings</h5>
+      {/* <h5>You can change the audio tone and volume via Settings</h5> */}
       <h5>Desktop Notifications are currently supported in Chrome, Firefox and Safari</h5>
       <button className="ui primary button" onClick={requestPermission}>Enable Desktop Alerts</button>
     </div>
