@@ -27,11 +27,15 @@ class Nav extends React.Component {
           <a className="item" href="https://twitter.com/intent/tweet?text=Pomodoro Timer: A simple Pomodoro Technique Timer&&url=https://simple-pomodoro-timer.herokuapp.com&&hashtags=pomodoro productive&&via=tonyfreelance88" target="_blank">
             Tweet about us!
           </a>
-          {/* <div className="right menu">
-            <a className="item">
-            Logout
+          <div className="right labeled icon menu">
+            {/* <a className="item">
+              Logout
+            </a> */}
+            <a className="item" href="https://github.com/tonyfreelance/simple-pomodoro-timer" target="_blank">
+              <i className="github icon"></i>
+              Github
             </a>
-          </div> */}
+          </div>
         </div>
         <div className="ui modal">
           <i className="close icon"></i>
