@@ -4,13 +4,12 @@ import Mousetrap from 'mousetrap';
 
 import timerSetup from '../api/timerSetup';
 import '../styles/ControlButtons.css';
-import store from '../store/configureStore';
 
 class ControlButtons extends Component {
 
   componentDidMount = () => {
     Mousetrap.bind('space', () => {
-      const timerStatus = store.getState().timer.status;
+      const { timerStatus } = this.props;
       if (timerStatus === 'started') {
         this.stop();
       } else {
@@ -24,7 +23,7 @@ class ControlButtons extends Component {
 
   componentWillUnmount = () => {
     Mousetrap.unbind('space', () => {
-      const timerStatus = store.getState().timer.status;
+      const { timerStatus } = this.props;
       if (timerStatus === 'started') {
         this.stop();
       } else {
@@ -34,6 +33,24 @@ class ControlButtons extends Component {
     Mousetrap.unbind('alt+r', () => {
       this.reset();
     });
+  }
+
+  disableButtons = (button) => {
+    const { timerStatus } = this.props;
+
+    // Start button style
+    if(timerStatus === 'stopped' && button === 'start') {
+      return 'green huge ui button';
+    } else if (timerStatus === 'started' && button === 'start') {
+      return 'green huge ui disabled button';
+    }
+
+    // Stop button style
+    if(timerStatus === 'started' && button === 'stop') {
+      return 'red huge ui button';
+    } else if (timerStatus === 'stopped' && button === 'stop') {
+      return 'red huge ui disabled button';
+    }
   }
 
   reset = () => {
@@ -55,10 +72,10 @@ class ControlButtons extends Component {
     return (
       <div className="ui five column stackable centered grid">
         <div className="column">
-          <button className="green huge ui button" onClick={this.start}>Start</button>
+          <button className={this.disableButtons('start')} onClick={this.start}>Start</button>
         </div>
         <div className="column">
-          <button className="red huge ui button" onClick={this.stop}>Stop</button>
+          <button className={this.disableButtons('stop')} onClick={this.stop}>Stop</button>
         </div>
         <div className="column">
           <button className="huge ui button" onClick={this.reset}>Reset</button>
@@ -68,4 +85,10 @@ class ControlButtons extends Component {
   }
 }
 
-export default connect()(ControlButtons);
+const mapStateToProps = (state) => {
+  return {
+    timerStatus: state.timer.status
+  };
+};
+
+export default connect(mapStateToProps)(ControlButtons);

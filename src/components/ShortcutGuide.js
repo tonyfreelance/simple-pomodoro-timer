@@ -27,13 +27,6 @@ const ShortcutGuide = () => {
           </ul>
         </div>
       </div>
-      {/* <ul className="">
-        <li><strong>SPACE</strong>{addSpace('       Start/Stop the timer')}</li>
-        <li><strong>ALT + P</strong>{addSpace('     Pomodoro')}</li>
-        <li><strong>ALT + S</strong>{addSpace('     Short Break')}</li>
-        <li><strong>ALT + L</strong>{addSpace('     Long Break')}</li>
-        <li><strong>ALT + R</strong>{addSpace('     Reset Timer')}</li>
-      </ul> */}
     </div>
   );
 }
